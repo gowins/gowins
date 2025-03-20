@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -19,12 +20,10 @@ import (
 )
 
 type ServerConfig struct {
-	Address     string `json:"address" yaml:"address"`
-	Mode        string `json:"mode" yaml:"mode"`
-	DownTime    int64  `json:"down_time" yaml:"down_time"`
-	ReadTime    int64  `json:"read_time" yaml:"read_time"`
-	WriteTime   int64  `json:"write_time" yaml:"write_time"`
-	MaxBodySize int64  `json:"max_body_size" yaml:"max_body_size"`
+	Address     string `json:"address" yaml:"address" mapstructure:"address"`
+	Mode        string `json:"mode" yaml:"mode" mapstructure:"mode"`
+	DownTime    int64  `json:"down_time" yaml:"down_time" mapstructure:"down_time"`
+	MaxBodySize int64  `json:"maxBodySize" yaml:"maxBodySize" mapstructure:"maxBodySize"`
 }
 
 func main() {
@@ -79,6 +78,7 @@ func main() {
 
 	// The context is used to inform the server it has 5 seconds to finish
 	// the request it is currently handling
+	fmt.Println(cfg.DownTime)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(cfg.DownTime)*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
