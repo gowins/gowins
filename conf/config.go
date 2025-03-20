@@ -19,5 +19,4 @@ func LoadConfig() {
 			panic("Failed to read config file: " + err.Error())
 		}
 	}
-
 }
