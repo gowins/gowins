@@ -1,0 +1,25 @@
+# IDE specific files
+.idea/
+*.iml
+.vscode/
+
+# Go build output
+bin/
+dist/
+*.exe
+*.test
+
+# Dependency directories
+vendor/
+
+
+# Log files
+*.log
+
+# Environment files
+.env
+.env.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
