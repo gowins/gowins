@@ -3,19 +3,30 @@ package main
 import (
 	"log"
 
-	"gowins/config"
+	"gowins/conf"
 	"gowins/logger"
 	"gowins/routes"
 
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
+
+type ServerConfig struct {
+	Address string `json:"address" yaml:"address"`
+	Mode    string `json:"mode" yaml:"mode"`
+}
 
 func main() {
 	// Load configuration
-	cfg := config.LoadConfig()
+	conf.LoadConfig()
+
+	cfg := &ServerConfig{}
+	if err := viper.Sub("server").Unmarshal(cfg); err != nil {
+		panic("Failed to parse config: " + err.Error())
+	}
 
 	// Set Gin mode
-	gin.SetMode(cfg.Server.Mode)
+	gin.SetMode(cfg.Mode)
 
 	// Initialize Gin engine
 	r := gin.Default()
@@ -26,7 +37,7 @@ func main() {
 	logger.SetupAccLogger(r)
 
 	// Start server
-	if err := r.Run(cfg.Server.Address); err != nil {
+	if err := r.Run(cfg.Address); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
 }

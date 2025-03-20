@@ -1,0 +1,11 @@
+server:
+  address: "0.0.0.0:8080"
+  mode: "release"
+
+database:
+  host: "localhost"
+  port: 3306
+  user: "root"
+  password: "password"
+  name: "mydatabase"
+
