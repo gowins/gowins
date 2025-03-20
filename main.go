@@ -11,6 +11,7 @@ import (
 
 	"gowins/conf"
 	"gowins/logger"
+	"gowins/middlewares"
 	"gowins/routes"
 
 	"github.com/gin-gonic/gin"
@@ -18,9 +19,12 @@ import (
 )
 
 type ServerConfig struct {
-	Address  string `json:"address" yaml:"address"`
-	Mode     string `json:"mode" yaml:"mode"`
-	DownTime int    `json:"down_time" yaml:"down_time"`
+	Address     string `json:"address" yaml:"address"`
+	Mode        string `json:"mode" yaml:"mode"`
+	DownTime    int64  `json:"down_time" yaml:"down_time"`
+	ReadTime    int64  `json:"read_time" yaml:"read_time"`
+	WriteTime   int64  `json:"write_time" yaml:"write_time"`
+	MaxBodySize int64  `json:"max_body_size" yaml:"max_body_size"`
 }
 
 func main() {
@@ -43,9 +47,14 @@ func main() {
 
 	logger.SetupAccLogger(r)
 
+	//
+	r.Use(middlewares.SetupMaxBodySizeMiddleware(cfg.MaxBodySize))
+
 	srv := &http.Server{
-		Addr:    cfg.Address,
-		Handler: r,
+		Addr:         cfg.Address,
+		Handler:      r,
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 5 * time.Second,
 	}
 
 	// Initializing the server in a goroutine so that

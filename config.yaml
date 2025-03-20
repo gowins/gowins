@@ -1,7 +1,8 @@
 server:
   address: "0.0.0.0:8080"
   mode: "release"
-  down_time: 5
+  down_time: 10
+  max_body_size: 10<<20
 
 database:
   host: "localhost"
