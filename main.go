@@ -47,8 +47,10 @@ func main() {
 
 	logger.SetupAccLogger(r)
 
-	//
-	r.Use(middlewares.SetupMaxBodySizeMiddleware(cfg.MaxBodySize))
+	// Set max body size middleware
+	if cfg.MaxBodySize > 0 {
+		r.Use(middlewares.SetupMaxBodySizeMiddleware(cfg.MaxBodySize))
+	}
 
 	srv := &http.Server{
 		Addr:         cfg.Address,
