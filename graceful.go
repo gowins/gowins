@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"context"
 	"log"
 	"net/http"
 	"os"
@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func RegisterGraceful(srv *http.Server) {
+func RegisterGraceful(srv *http.Server, hammer int64) {
 	// Initializing the server in a goroutine so that
 	// it won't block the graceful shutdown handling below
 	go func() {
@@ -31,8 +31,7 @@ func RegisterGraceful(srv *http.Server) {
 
 	// The context is used to inform the server it has 5 seconds to finish
 	// the request it is currently handling
-	fmt.Println(cfg.DownTime)
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(cfg.DownTime)*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(hammer)*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatal("Server forced to shutdown: ", err)

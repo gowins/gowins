@@ -53,6 +53,6 @@ func main() {
 		WriteTimeout: 5 * time.Second,
 	}
 
-	RegisterGraceful(srv)
+	RegisterGraceful(srv, cfg.DownTime)
 
 }
