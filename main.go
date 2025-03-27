@@ -14,10 +14,11 @@ import (
 )
 
 type ServerConfig struct {
-	Address     string `json:"address" yaml:"address" mapstructure:"address"`
-	Mode        string `json:"mode" yaml:"mode" mapstructure:"mode"`
-	DownTime    int64  `json:"down_time" yaml:"down_time" mapstructure:"down_time"`
-	MaxBodySize int64  `json:"maxBodySize" yaml:"maxBodySize" mapstructure:"maxBodySize"`
+	Address        string `json:"address" yaml:"address" mapstructure:"address"`
+	Mode           string `json:"mode" yaml:"mode" mapstructure:"mode"`
+	DownTime       int64  `json:"down_time" yaml:"down_time" mapstructure:"down_time"`
+	MaxBodySize    int64  `json:"maxBodySize" yaml:"maxBodySize" mapstructure:"max_body_size"`
+	RequestTimeout int64  `json:"requestTimeout" yaml:"requestTimeout" mapstructure:"request_timeout"`
 }
 
 func main() {
@@ -34,9 +35,6 @@ func main() {
 	// Initialize Gin engine
 	r := gin.Default()
 
-	// Setup routes
-	routes.SetupRoutes(r)
-
 	// Setup loggers
 	logger.SetupAccLogger(r)
 
@@ -46,11 +44,17 @@ func main() {
 		r.Use(middlewares.SetupMaxBodySizeMiddleware(cfg.MaxBodySize))
 	}
 
+	r.Use(middlewares.TimeoutMiddleware(time.Duration(cfg.RequestTimeout) * time.Second))
+
+	// Setup routes
+	routes.SetupRoutes(r)
+	// Set timeout middleware
+	//r.Use(middlewares.TimeoutMiddleware(time.Duration(cfg.RequestTimeout) * time.Second))
 	srv := &http.Server{
-		Addr:         cfg.Address,
-		Handler:      r,
-		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 5 * time.Second,
+		Addr:    cfg.Address,
+		Handler: r,
+		//ReadTimeout:  time.Duration(cfg.RequestTimeout) * time.Second,
+		//WriteTimeout: time.Duration(cfg.RequestTimeout) * time.Second,
 	}
 
 	RegisterGraceful(srv, cfg.DownTime)

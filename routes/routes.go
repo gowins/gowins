@@ -9,5 +9,5 @@ import (
 func SetupRoutes(r *gin.Engine) {
 
 	// Define routes
-	r.GET("/ping", controllers.Ping)
+	r.POST("/ping", controllers.Ping)
 }
