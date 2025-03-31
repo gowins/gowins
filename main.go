@@ -33,10 +33,17 @@ func main() {
 	gin.SetMode(cfg.Mode)
 
 	// Initialize Gin engine
-	r := gin.Default()
+	r := gin.New()
 
+	// 禁用默认的日志输出
+	gin.DisableConsoleColor() // 禁用日志的颜色输出
 	// Setup loggers
 	logger.SetupAccLogger(r)
+
+	//format recovery output  middleware
+	logWriter := &middlewares.JSONLogWriter{}
+	r.Use(gin.RecoveryWithWriter(logWriter))
+	//r.Use(middlewares.CustomRecovery())
 
 	// Register middleware
 	// Set max body size middleware
