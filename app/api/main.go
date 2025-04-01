@@ -4,10 +4,10 @@ import (
 	"net/http"
 	"time"
 
+	"gowins/app/api/routes"
 	"gowins/conf"
 	"gowins/logger"
 	"gowins/middlewares"
-	"gowins/routes"
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
@@ -40,10 +40,11 @@ func main() {
 	// Setup loggers
 	logger.SetupAccLogger(r)
 
-	//format recovery output  middleware
-	logWriter := &middlewares.JSONLogWriter{}
-	r.Use(gin.RecoveryWithWriter(logWriter))
-	//r.Use(middlewares.CustomRecovery())
+	if !gin.IsDebugging() {
+		//format recovery output  middleware
+		logWriter := &middlewares.JSONLogWriter{}
+		r.Use(gin.RecoveryWithWriter(logWriter))
+	}
 
 	// Register middleware
 	// Set max body size middleware
@@ -58,10 +59,10 @@ func main() {
 	// Set timeout middleware
 	//r.Use(middlewares.TimeoutMiddleware(time.Duration(cfg.RequestTimeout) * time.Second))
 	srv := &http.Server{
-		Addr:    cfg.Address,
-		Handler: r,
-		//ReadTimeout:  time.Duration(cfg.RequestTimeout) * time.Second,
-		//WriteTimeout: time.Duration(cfg.RequestTimeout) * time.Second,
+		Addr:         cfg.Address,
+		Handler:      r,
+		ReadTimeout:  time.Duration(cfg.RequestTimeout) * time.Second,
+		WriteTimeout: time.Duration(cfg.RequestTimeout) * time.Second,
 	}
 
 	RegisterGraceful(srv, cfg.DownTime)

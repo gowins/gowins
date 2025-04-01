@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"gowins/controllers"
+	"gowins/app/api/controllers"
 
 	"github.com/gin-gonic/gin"
 )
