@@ -40,3 +40,9 @@
 - [ ] **Gzip Compression**: Enable Gzip compression for responses.
 - [ ] **Connection Pooling**: Optimize database connection pooling.
 - [ ] **Load Testing**: Perform load testing to identify bottlenecks.
+
+## 整理所有bind类型和tag的参数
+- bind相关内容：[doc/bind.md](doc/bind.md)
+- bind struct tag相关内容：[doc/bind_tag.md](doc/bind_tag.md)
+
+## 动态中间件的auth验证
