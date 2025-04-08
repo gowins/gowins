@@ -1,14 +1,12 @@
-package configs
+package util
 
 import (
 	"github.com/spf13/viper"
 )
 
-func LoadConfig() {
+func LoadConfig(conf string) {
 	// 初始化 Viper
-	viper.SetConfigName("config") // 配置文件名称（无扩展名）
-	viper.SetConfigType("yaml")   // 配置文件类型
-	viper.AddConfigPath(".")      // 配置文件路径
+	viper.SetConfigFile(conf)
 
 	// 读取配置文件
 	if err := viper.ReadInConfig(); err != nil {

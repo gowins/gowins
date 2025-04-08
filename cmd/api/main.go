@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"time"
 
-	"gowins/configs"
 	"gowins/internal/infrastructure/logger"
 	"gowins/internal/infrastructure/middlewares"
 	interfaces "gowins/internal/interfaces/http"
@@ -24,7 +23,7 @@ type ServerConfig struct {
 
 func main() {
 	// Load configuration
-	configs.LoadConfig()
+	util.LoadConfig("configs/config.yaml")
 	cfg := &ServerConfig{}
 	if err := viper.Sub("server").Unmarshal(cfg); err != nil {
 		panic("Failed to parse config: " + err.Error())
