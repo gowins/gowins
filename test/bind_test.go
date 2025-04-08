@@ -1,4 +1,4 @@
-package tests
+package test
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"gowins/utils"
+	"gowins/pkg/util"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
@@ -36,7 +36,7 @@ func TestBind(t *testing.T) {
 		})
 	})
 
-	rr := utils.PerformRequest(router, http.MethodGet, "/getc?field_a=hello&field_c=world", nil, nil)
+	rr := util.PerformRequest(router, http.MethodGet, "/getc?field_a=hello&field_c=world", nil, nil)
 	assert.Equal(t, http.StatusOK, rr.Code)
 	assert.Equal(t, `{"a":{"FieldA":"hello"},"c":"world"}`, rr.Body.String())
 }
@@ -67,9 +67,9 @@ func TestBindJSON(t *testing.T) {
 		assert.Equal(t, "appleboy", person.Name)
 	})
 
-	rr := utils.PerformRequest(router, http.MethodPost, "/post?user=appleboy",
-		[]utils.Header{{Key: "Content-Type", Value: "application/json"}},
-		strings.NewReader(`{"user":"kenny","password":"1234"}`))
+	rr := util.PerformRequest(router, http.MethodPost, "/post?user=appleboy",
+		strings.NewReader(`{"user":"kenny","password":"1234"}`),
+		[]util.Header{{Key: "Content-Type", Value: "application/json"}})
 
 	assert.Equal(t, http.StatusOK, rr.Code)
 }

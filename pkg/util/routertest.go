@@ -1,4 +1,4 @@
-package utils
+package util
 
 import (
 	"io"
@@ -17,7 +17,7 @@ type Body struct {
 }
 
 // PerformRequest for testing gin router.
-func PerformRequest(r http.Handler, method, path string, headers []Header, body io.Reader) *httptest.ResponseRecorder {
+func PerformRequest(r http.Handler, method, path string, body io.Reader, headers []Header) *httptest.ResponseRecorder {
 	req := httptest.NewRequest(method, path, body)
 	for _, h := range headers {
 		req.Header.Add(h.Key, h.Value)

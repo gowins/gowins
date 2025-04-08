@@ -4,10 +4,11 @@ import (
 	"net/http"
 	"time"
 
-	"gowins/app/api/routes"
-	"gowins/conf"
-	"gowins/logger"
-	"gowins/middlewares"
+	"gowins/configs"
+	"gowins/internal/infrastructure/logger"
+	"gowins/internal/infrastructure/middlewares"
+	interfaces "gowins/internal/interfaces/http"
+	"gowins/pkg/util"
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
@@ -23,7 +24,7 @@ type ServerConfig struct {
 
 func main() {
 	// Load configuration
-	conf.LoadConfig()
+	configs.LoadConfig()
 	cfg := &ServerConfig{}
 	if err := viper.Sub("server").Unmarshal(cfg); err != nil {
 		panic("Failed to parse config: " + err.Error())
@@ -55,7 +56,7 @@ func main() {
 	r.Use(middlewares.TimeoutMiddleware(time.Duration(cfg.RequestTimeout) * time.Second))
 
 	// Setup routes
-	routes.SetupRoutes(r)
+	interfaces.RegisterRoutes(r)
 	// Set timeout middleware
 	//r.Use(middlewares.TimeoutMiddleware(time.Duration(cfg.RequestTimeout) * time.Second))
 	srv := &http.Server{
@@ -65,6 +66,6 @@ func main() {
 		WriteTimeout: time.Duration(cfg.RequestTimeout) * time.Second,
 	}
 
-	RegisterGraceful(srv, cfg.DownTime)
+	util.RegisterGraceful(srv, cfg.DownTime)
 
 }
