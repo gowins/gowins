@@ -14,6 +14,7 @@ func RegisterRoutes(router *gin.Engine) {
 	rewardController := controllers.NewRewardController(rewardService)
 
 	rewardGroup := router.Group("/rewards")
+
 	{
 		rewardGroup.POST("/add", rewardController.CreateReward)
 	}

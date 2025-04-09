@@ -32,17 +32,17 @@ func TestRewardController_CreateReward(t *testing.T) {
 		Steps:       []string{"step1", "step2", "step3"},
 		Deadline:    time.Now().Add(48 * time.Hour).Unix(),
 		ReviewTime:  time.Now().Unix(),
-		UnitPrice:   99.99,
+		UnitPrice:   10,
 		Quantity:    5,
 		SingleUse:   false,
 	}
 
 	jsonValue, _ := json.Marshal(newItem)
-
 	rr := util.PerformRequest(r, http.MethodPost, "/rewards/create", bytes.NewBuffer(jsonValue), nil)
 
 	var response dto.RewardResponse
 	err := json.Unmarshal(rr.Body.Bytes(), &response)
 	assert.NoError(t, err)
 	assert.Equal(t, http.StatusOK, rr.Code)
+	assert.Equal(t, response.TotalAmount, newItem.UnitPrice*float64(newItem.Quantity))
 }

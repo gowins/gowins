@@ -48,8 +48,6 @@
 │   ├── util/                     # 通用工具
 │   └── errors/                   # 错误处理
 │
-
-│
 ├── configs/                      # 配置文件
 ├── deployments/                  # 部署配置
 ├── scripts/                      # 脚本

@@ -23,10 +23,10 @@ func (rc *RewardController) CreateReward(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	id, err := rc.service.CreateReward(req)
+	resp, err := rc.service.CreateReward(req)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	ctx.JSON(http.StatusOK, gin.H{"id": id})
+	ctx.JSON(http.StatusOK, resp)
 }

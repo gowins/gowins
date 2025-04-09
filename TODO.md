@@ -11,6 +11,7 @@
 - [ ] **Validation**: Validate request payloads using struct tags or custom validators.
 - [ ] **Database Integration**: Integrate with databases like MySQL, PostgreSQL, or MongoDB.
 - [ ] **Caching**: Implement caching mechanisms (e.g., Redis) for improved performance.
+- [ ] **wire/dig inject**: [wire](https://github.com/google/wire)
 
 ## Deployment & Maintenance
 - [ ] **Dockerization**: Create Dockerfiles for containerized deployment.

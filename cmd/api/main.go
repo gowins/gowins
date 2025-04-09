@@ -56,6 +56,7 @@ func main() {
 
 	// Setup routes
 	interfaces.RegisterRoutes(r)
+
 	// Set timeout middleware
 	//r.Use(middlewares.TimeoutMiddleware(time.Duration(cfg.RequestTimeout) * time.Second))
 	srv := &http.Server{

@@ -15,7 +15,7 @@ func NewRewardAppService(repo reward.Repository) *RewardAppService {
 	return &RewardAppService{repo: repo}
 }
 
-func (s *RewardAppService) CreateReward(req dto.CreateRewardRequest) (string, error) {
+func (s *RewardAppService) CreateReward(req dto.CreateRewardRequest) (*dto.RewardResponse, error) {
 	id := uuid.NewString()
 	r := &reward.Reward{
 		Type:        req.Type,
@@ -30,7 +30,14 @@ func (s *RewardAppService) CreateReward(req dto.CreateRewardRequest) (string, er
 		Quantity:    req.Quantity,
 		SingleUse:   req.SingleUse,
 	}
-	newReward := reward.NewReward(id, r)
+	newReward := reward.NewReward(id, r) //pure logic
 	err := s.repo.Save(newReward)
-	return newReward.ID, err
+	if err != nil {
+		return nil, err
+	}
+
+	return &dto.RewardResponse{
+		ID:          newReward.ID,
+		TotalAmount: newReward.TotalAmount,
+	}, nil
 }

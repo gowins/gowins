@@ -1,0 +1,152 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "test",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "示例项目"
+    }
+  ],
+  "paths": {
+    "/rewards/create": {
+      "post": {
+        "summary": "悬赏生成测试",
+        "x-apifox-folder": "示例项目",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "示例项目"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "device": {
+                    "type": "string"
+                  },
+                  "project": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "steps": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "deadline": {
+                    "type": "integer"
+                  },
+                  "review_time": {
+                    "type": "integer"
+                  },
+                  "unit_price": {
+                    "type": "number"
+                  },
+                  "quantity": {
+                    "type": "integer"
+                  },
+                  "single_use": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "type",
+                  "device",
+                  "project",
+                  "title",
+                  "description",
+                  "steps",
+                  "deadline",
+                  "review_time",
+                  "unit_price",
+                  "quantity",
+                  "single_use"
+                ],
+                "x-apifox-orders": [
+                  "type",
+                  "device",
+                  "project",
+                  "title",
+                  "description",
+                  "steps",
+                  "deadline",
+                  "review_time",
+                  "unit_price",
+                  "quantity",
+                  "single_use"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "type": "electronics",
+                "device": "smartphone",
+                "project": "mobile-app",
+                "title": "Test Device",
+                "description": "This is a test device",
+                "steps": [
+                  "step1",
+                  "step2",
+                  "step3"
+                ],
+                "deadline": 1744277196,
+                "review_time": 1744104396,
+                "unit_price": 99.99,
+                "quantity": 5,
+                "single_use": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "total_amount": {
+                      "type": "integer"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "id",
+                    "total_amount"
+                  ],
+                  "required": [
+                    "id",
+                    "total_amount"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/6177230/apis/api-281470860-run"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
