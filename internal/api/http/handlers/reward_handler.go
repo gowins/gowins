@@ -1,4 +1,4 @@
-package controllers
+package handlers
 
 import (
 	"net/http"
@@ -9,15 +9,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type RewardController struct {
+type Rewardhandler struct {
 	service *rewardapp.RewardAppService
 }
 
-func NewRewardController(s *rewardapp.RewardAppService) *RewardController {
-	return &RewardController{service: s}
+func NewRewardhandler(s *rewardapp.RewardAppService) *Rewardhandler {
+	return &Rewardhandler{service: s}
 }
 
-func (rc *RewardController) CreateReward(ctx *gin.Context) {
+func (rc *Rewardhandler) CreateReward(ctx *gin.Context) {
 	var req dto.CreateRewardRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

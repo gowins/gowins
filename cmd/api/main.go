@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"time"
 
-	"gowins/internal/infrastructure/logger"
-	"gowins/internal/infrastructure/middlewares"
-	interfaces "gowins/internal/interfaces/http"
+	interfaces "gowins/internal/api/http"
+	"gowins/internal/infra/logger"
+	"gowins/internal/infra/middlewares"
 	"gowins/pkg/util"
 
 	"github.com/gin-gonic/gin"

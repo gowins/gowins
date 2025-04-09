@@ -1,4 +1,4 @@
-package controllers
+package handlers
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 
 	rewardapp "gowins/internal/application/reward"
 	"gowins/internal/application/reward/dto"
-	repo "gowins/internal/infrastructure/persistence"
+	repo "gowins/internal/infra/persistence"
 	"gowins/pkg/util"
 
 	"github.com/gin-gonic/gin"
@@ -20,7 +20,7 @@ func TestRewardController_CreateReward(t *testing.T) {
 	r := gin.New()
 	rewardRepo := repo.NewRewardRepository()
 	rewardService := rewardapp.NewRewardAppService(rewardRepo)
-	rewardController := NewRewardController(rewardService)
+	rewardController := NewRewardhandler(rewardService)
 	r.POST("/rewards/create", rewardController.CreateReward)
 	// 准备测试数据
 	newItem := dto.CreateRewardRequest{
