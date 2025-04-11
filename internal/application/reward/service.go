@@ -8,7 +8,8 @@ import (
 )
 
 type RewardAppService struct {
-	repo reward.Repository
+	//repo reward.Repository
+	repo reward.Repository `name:"inMemoryRewardRepo"`
 }
 
 func NewRewardAppService(repo reward.Repository) *RewardAppService {

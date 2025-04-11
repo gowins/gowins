@@ -7,6 +7,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/spf13/viper v1.20.0
 	github.com/stretchr/testify v1.10.0
+	go.uber.org/dig v1.18.1
 )
 
 require (

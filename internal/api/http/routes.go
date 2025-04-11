@@ -11,11 +11,22 @@ import (
 func RegisterRoutes(router *gin.Engine) {
 	rewardRepo := repo.NewRewardRepository()
 	rewardService := rewardapp.NewRewardAppService(rewardRepo)
-	rewardController := handlers.NewRewardhandler(rewardService)
+	rewardHandler := handlers.NewRewardhandler(rewardService)
 
 	rewardGroup := router.Group("/rewards")
-
 	{
-		rewardGroup.POST("/add", rewardController.CreateReward)
+		rewardGroup.POST("/add", rewardHandler.CreateReward)
 	}
+
+	//// routes/user_routes.go
+	//func registerUserRoutes(router *gin.RouterGroup) {
+	//	router.GET("", h.ListUsers)
+	//	router.POST("", h.CreateUser)
+	//}
+	//
+	//// routes/routes.go
+	//func (r *Router) RegisterAll(router *gin.Engine) {
+	//	v1 := router.Group("/api/v1")
+	//	r.registerUserRoutes(v1.Group("/users"))
+	//}
 }

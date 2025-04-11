@@ -16,12 +16,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestRewardController_CreateReward(t *testing.T) {
+func TestRewardHandler_CreateReward(t *testing.T) {
 	r := gin.New()
 	rewardRepo := repo.NewRewardRepository()
 	rewardService := rewardapp.NewRewardAppService(rewardRepo)
-	rewardController := NewRewardhandler(rewardService)
-	r.POST("/rewards/create", rewardController.CreateReward)
+	rewardHandler := NewRewardhandler(rewardService)
+	r.POST("/rewards/create", rewardHandler.CreateReward)
 	// 准备测试数据
 	newItem := dto.CreateRewardRequest{
 		Type:        "electronics",

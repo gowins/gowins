@@ -24,3 +24,6 @@ vendor/
 .DS_Store
 Thumbs.db
 /test.go
+
+# demo dir
+demo/
