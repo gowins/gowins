@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
 	"go.uber.org/dig"
 )
@@ -15,7 +16,7 @@ type DBOutput struct {
 	WriteDB *sql.DB `name:"writeDB"`
 }
 
-// NewDBs --- 2. 初始化数据库连接 ---
+// DBs --- 2. 初始化数据库连接 ---
 func NewDBs() DBOutput {
 	readDB := &sql.DB{}
 	writeDB := &sql.DB{}
@@ -122,5 +123,16 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// 可视化依赖图并输出到文件
+	// dot -Tpng  dependency_graph.dot -o dependency_graph.png
+	file, err := os.Create("dependency_graph.dot")
+	if err != nil {
+		fmt.Println("Error creating file:", err)
+		return
+	}
+	defer file.Close()
+
+	err = dig.Visualize(container, file, dig.VisualizeError(err))
 
 }

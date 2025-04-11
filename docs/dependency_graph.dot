@@ -1,0 +1,54 @@
+digraph {
+	rankdir=RL;
+	graph [compound=true];
+	
+		subgraph cluster_0 {
+			label = "main";
+			constructor_0 [shape=plaintext label="NewDBs"];
+			
+			"*sql.DB[name=readDB]" [label=<*sql.DB<BR /><FONT POINT-SIZE="10">Name: readDB</FONT>>];
+			"*sql.DB[name=writeDB]" [label=<*sql.DB<BR /><FONT POINT-SIZE="10">Name: writeDB</FONT>>];
+			
+		}
+		
+		
+		subgraph cluster_1 {
+			label = "log";
+			constructor_1 [shape=plaintext label="Default"];
+			
+			"*log.Logger" [label=<*log.Logger>];
+			
+		}
+		
+		
+		subgraph cluster_2 {
+			label = "main";
+			constructor_2 [shape=plaintext label="BuildContainer.func1"];
+			
+			"*sql.DB[name=DeclareDB]" [label=<*sql.DB<BR /><FONT POINT-SIZE="10">Name: DeclareDB</FONT>>];
+			
+		}
+		
+		
+		subgraph cluster_3 {
+			label = "main";
+			constructor_3 [shape=plaintext label="NewServiceContainer"];
+			
+			"*main.UserService" [label=<*main.UserService>];
+			"*main.OrderService" [label=<*main.OrderService>];
+			
+		}
+		
+			constructor_3 -> "*sql.DB[name=DeclareDB]" [ltail=cluster_3];
+		
+			constructor_3 -> "*sql.DB[name=readDB]" [ltail=cluster_3];
+		
+			constructor_3 -> "*sql.DB[name=writeDB]" [ltail=cluster_3];
+		
+			constructor_3 -> "*log.Logger" [ltail=cluster_3];
+		
+			constructor_3 -> "*main.Option" [ltail=cluster_3 style=dashed];
+		
+		
+	
+}
