@@ -20,7 +20,7 @@ func TestRewardHandler_CreateReward(t *testing.T) {
 	r := gin.New()
 	rewardRepo := repo.NewRewardRepository()
 	rewardService := rewardapp.NewRewardAppService(rewardRepo)
-	rewardHandler := NewRewardhandler(rewardService)
+	rewardHandler := NewRewardHandler(rewardService)
 	r.POST("/rewards/create", rewardHandler.CreateReward)
 	// 准备测试数据
 	newItem := dto.CreateRewardRequest{

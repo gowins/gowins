@@ -9,15 +9,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Rewardhandler struct {
+type RewardHandler struct {
 	service *rewardapp.RewardAppService
 }
 
-func NewRewardhandler(s *rewardapp.RewardAppService) *Rewardhandler {
-	return &Rewardhandler{service: s}
+func NewRewardHandler(s *rewardapp.RewardAppService) *RewardHandler {
+	return &RewardHandler{service: s}
 }
 
-func (rc *Rewardhandler) CreateReward(ctx *gin.Context) {
+func (rc *RewardHandler) CreateReward(ctx *gin.Context) {
 	var req dto.CreateRewardRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

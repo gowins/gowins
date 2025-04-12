@@ -3,9 +3,11 @@
 ## Core Features
 - [x] **Routing**: Define and handle HTTP routes (GET, POST, PUT, DELETE, etc.).
 - [x] **Middleware**: Implement custom middleware for request processing.
-- [x] **Logging**: Customize logging format and output (e.g., JSON logging).
+- [ ] **Logging**: Customize logging format and output (e.g., JSON logging).
+  - global logger or inject logger
 - [x] **Error Handling**: Centralized error handling for consistent responses.
-
+- [ ] **Container**: Dependency injection for modular applications. Where to provide? 
+ 
 ## Advanced Features
 - [ ] **Authentication**: Implement JWT, OAuth, or Basic Authentication.
 - [ ] **Validation**: Validate request payloads using struct tags or custom validators.

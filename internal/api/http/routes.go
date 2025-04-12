@@ -11,7 +11,7 @@ import (
 func RegisterRoutes(router *gin.Engine) {
 	rewardRepo := repo.NewRewardRepository()
 	rewardService := rewardapp.NewRewardAppService(rewardRepo)
-	rewardHandler := handlers.NewRewardhandler(rewardService)
+	rewardHandler := handlers.NewRewardHandler(rewardService)
 
 	rewardGroup := router.Group("/rewards")
 	{

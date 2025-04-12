@@ -20,7 +20,7 @@ func BuildContainer() *dig.Container {
 
 	// Provide HTTP handler NewRewardHandler
 
-	container.Provide(handlers.NewRewardhandler)
+	container.Provide(handlers.NewRewardHandler)
 
 	return container
 }
