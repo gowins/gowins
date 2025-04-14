@@ -18,7 +18,7 @@
 │   │   │   ├── reward_item.go    # 子实体（OrderItem）
 │   │   │   ├── repository.go     # 仓储接口
 │   │   │   ├── events.go         # 领域事件
-│   │   │   └── service.go        # 领域服务（如OrderValidationService）
+│   │   │   └── service.go        # 领域服务（如RewardValidationService）
 │   │   │
 │   │   ├── product/              # 产品聚合（类似结构）
 │   │   └── shared/               # 跨聚合共享定义
@@ -40,7 +40,7 @@
 │   │
 │   └── infra/                    # 基础设施层
 │       ├── persistence/          # 持久化实现
-│       │   └── order_repository.go
+│       │   └── reward_repository.go
 │       ├── db/                   # 数据库连接
 │       └── logging/              # 日志等工具
 │

@@ -6,14 +6,14 @@
 - [ ] **Logging**: Customize logging format and output (e.g., JSON logging).
   - global logger or inject logger
 - [x] **Error Handling**: Centralized error handling for consistent responses.
-- [ ] **Container**: Dependency injection for modular applications. Where to provide? 
+- [ ] **Container**: Dependency injection for modular applications. Where to provide? [fx](https://uber-go.github.io/fx/index.html)
  
 ## Advanced Features
 - [ ] **Authentication**: Implement JWT, OAuth, or Basic Authentication.
 - [ ] **Validation**: Validate request payloads using struct tags or custom validators.
 - [ ] **Database Integration**: Integrate with databases like MySQL, PostgreSQL, or MongoDB.
 - [ ] **Caching**: Implement caching mechanisms (e.g., Redis) for improved performance.
-- [ ] **wire/dig inject**: [wire](https://github.com/google/wire)
+- [ ] **wire/dig inject**: [wire](https://github.com/google/wire) 
 
 ## Deployment & Maintenance
 - [ ] **Dockerization**: Create Dockerfiles for containerized deployment.
